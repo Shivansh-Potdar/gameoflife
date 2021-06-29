@@ -30,8 +30,20 @@ fn main() -> Result<(), das_grid::GridErr>{
     };
 
     //For loop to check and update states
-    for c in main_g.into_iter() {
-        println!("{:?}", c);
+    let mut plc_x = 0;
+    let mut plc_y = 0;
+    for (x, y) in main_g.enumerate(){
+        //add thread to do at same time 
+        //Code to loop through rows
+        while plc_x <= x {
+            plc_x += 1;
+            println!("This is  row: {}", plc_x);
+        }
+        //Code to loop through coloumns
+        while plc_y <= y {
+            plc_y += 1;
+            println!("This is  coloumn: {}", plc_y);
+        }
     }
 
     print!("{:?}", main_g);
