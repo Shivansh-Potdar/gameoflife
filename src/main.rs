@@ -9,48 +9,50 @@ fn main() -> Result<(), das_grid::GridErr>{
 
     loop {
 
-        //Glider Shape set
-    match main_g.set((0, 1), &1) {
-        Ok(_) => (),
-        Err(_) => println!("Could not set initial poitions, please check code.")
-    };
+        liv_n = 0;
 
-    match main_g.set((1, 2), &1) {
-        Ok(_) => (),
-        Err(_) => println!("Could not set initial poitions, please check code.")
-    };
+        //Shape
+        match main_g.set((0, 1), &1) {
+            Ok(_) => (),
+            Err(_) => println!("Could not set initial poitions, please check code.")
+        };
 
-    match main_g.set((2, 1), &1) {
-        Ok(_) => (),
-        Err(_) => println!("Could not set initial poitions, please check code.")
-    };
+        match main_g.set((1, 2), &1) {
+            Ok(_) => (),
+            Err(_) => println!("Could not set initial poitions, please check code.")
+        };
 
-    //For loop to check and update states
-    for (x, y) in main_g.enumerate(){
-        if x!= 0 && y != 0 || x != 1 && y != 1{
-            //check neighbours above
-            match main_g.get((x-1, y)) {
-                Ok(&1) => {liv_n+=1;},
-                _=> { empty_cell+=1; print!("");}
-            };
+        match main_g.set((2, 1), &1) {
+            Ok(_) => (),
+            Err(_) => println!("Could not set initial poitions, please check code.")
+        };
 
-            //check neighbours left
-            match main_g.get((x, y-1)) {
-                Ok(&1) => {liv_n+=1;},
-                _=> { empty_cell+=1; print!("");}
-            };
+        //For loop to check and update states
+        for (x, y) in main_g.enumerate(){
+            if x!= 0 && y != 0 || x != 1 && y != 1{
+                //check neighbours above
+                match main_g.get((x-1, y)) {
+                    Ok(&1) => {liv_n+=1;},
+                    _=> { empty_cell+=1; print!("");}
+                };
 
-            //check neighbours below
-            match main_g.get((x+1, y)) {
-                Ok(&1) => {liv_n+=1;},
-                _=> { empty_cell+=1; print!("");}
-            };
+                //check neighbours left
+                match main_g.get((x, y-1)) {
+                    Ok(&1) => {liv_n+=1;},
+                    _=> { empty_cell+=1; print!("");}
+                };
 
-            //check neighbours right
-            match main_g.get((x, y+1)) {
-                Ok(&1) => {liv_n+=1;},
-                _=> { empty_cell+=1; print!("");}
-            };
+                //check neighbours below
+                match main_g.get((x+1, y)) {
+                    Ok(&1) => {liv_n+=1;},
+                    _=> { empty_cell+=1; print!("");}
+                };
+
+                //check neighbours right
+                match main_g.get((x, y+1)) {
+                    Ok(&1) => {liv_n+=1;},
+                    _=> { empty_cell+=1; print!("");}
+                };
             } else {
                 //check neighbours below
                 match main_g.get((x+1, y)) {
@@ -83,13 +85,11 @@ fn main() -> Result<(), das_grid::GridErr>{
 
         l_c+=1;
 
-        if l_c == 2{
+        if l_c == 3{
             break;
         }
     }
     println!("{}", liv_n);
-
-    //make amount of loops setting
 
     Ok(())
 }
